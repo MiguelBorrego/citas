@@ -26,7 +26,7 @@ class Medico extends Model
         return $this->name .' '.$this->surname;
     }
 
-    public function getCodigo()
+    public function getCodigoM()
     {
         return null;
     }
