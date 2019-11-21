@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Paciente extends Model
 {
     //
-    protected $fillable = ['name', 'surname', 'nuhsa'];
+    protected $fillable = ['name', 'surname', 'nuhsa','aseguradora_id'];
 
+    public function aseguradora()
+    {
+        return $this->belongsTo('App\Aseguradora');
+    }
 
     public function citas()
     {

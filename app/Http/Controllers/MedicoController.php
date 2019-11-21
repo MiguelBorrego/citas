@@ -90,7 +90,6 @@ class MedicoController extends Controller
 
         $especialidades = Especialidad::all()->pluck('name','id');
 
-
         return view('medicos/edit',['medico'=> $medico, 'especialidades'=>$especialidades ]);
     }
 
