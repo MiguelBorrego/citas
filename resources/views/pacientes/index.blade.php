@@ -18,10 +18,10 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
-                                <th>Nuhsa</th>
+                                <th>NUHSA</th>
                                 <th>Aseguradora</th>
 
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
                             </tr>
 
                             @foreach ($pacientes as $paciente)
@@ -32,9 +32,15 @@
                                     <td>{{ $paciente->surname }}</td>
                                     <td>{{ $paciente->nuhsa }}</td>
                                     <td>{{ $paciente->aseguradora->name }}</td>
+
                                     <td>
                                         {!! Form::open(['route' => ['pacientes.edit',$paciente->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
+                                        {!! Form::open(['route' => ['pacientes.show',$paciente->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>

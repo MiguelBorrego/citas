@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Aseguradora;
+use App\Cita;
 use Illuminate\Http\Request;
 use App\Paciente;
 
@@ -76,7 +77,12 @@ class PacienteController extends Controller
      */
     public function show($id)
     {
-        // TODO: Mostrar las citas de un paciente
+
+        $citas =Cita::all();
+        $res= $citas->where('paciente_id',$id);
+
+        return view('pacientes/show',['citas'=>$res,'id'=>$id]);
+
     }
 
     /**
