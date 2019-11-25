@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::delete('especialidades/destroyAll', 'EspecialidadController@destroyAll')->name('especialidades.destroyAll');
 Route::resource('especialidades', 'EspecialidadController');
 
+Route::resource('aseguradoras', 'AseguradoraController');
+
 Route::resource('medicos', 'MedicoController');
 Route::resource('pacientes', 'PacienteController');
 

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Especialidad;
+use App\Aseguradora;
 use Illuminate\Http\Request;
 
-use App\Medico;
-
-class MedicoController extends Controller
+class AseguradoraController extends Controller
 {
+
 
     public function __construct()
     {
@@ -22,10 +21,10 @@ class MedicoController extends Controller
      */
     public function index()
     {
-        $medicos = Medico::all();
+        //
+        $aseguradoras = Aseguradora::all();
 
-        return view('medicos/index',['medicos'=>$medicos]);
-
+        return view('aseguradoras/index')->with('aseguradoras', $aseguradoras);
     }
 
     /**
@@ -36,10 +35,7 @@ class MedicoController extends Controller
     public function create()
     {
         //
-        $especialidades = Especialidad::all()->pluck('name','id');
-
-        return view('medicos/create',['especialidades'=>$especialidades]);
-
+        return view( 'aseguradoras/create');
     }
 
     /**
@@ -48,88 +44,88 @@ class MedicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
+        //
         $this->validate($request, [
             'name' => 'required|max:255',
-            'surname' => 'required|max:255',
-            'especialidad_id' => 'required|exists:especialidads,id'
         ]);
-        $medico = new Medico($request->all());
-        $medico->save();
 
-        // return redirect('especialidades');
+        //
+        $aseguradora = new Aseguradora($request->all());
+        $aseguradora->save();
 
-        flash('Medico creado correctamente');
+        // return redirect('aseguradoras');
 
-        return redirect()->route('medicos.index');
+        flash('Aseguradora creada correctamente');
+
+        return redirect()->route('aseguradoras.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Aseguradora  $aseguradora
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Aseguradora  $aseguradora
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
+        $aseguradora = Aseguradora::find($id);
 
-        $medico = Medico::find($id);
-
-        $especialidades = Especialidad::all()->pluck('name','id');
-
-        return view('medicos/edit',['medico'=> $medico, 'especialidades'=>$especialidades ]);
+        return view('aseguradoras/edit')->with('aseguradora', $aseguradora);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Aseguradora  $aseguradora
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+        //
         $this->validate($request, [
             'name' => 'required|max:255',
-            'surname' => 'required|max:255',
-            'especialidad_id' => 'required|exists:especialidads,id'
         ]);
 
-        $medico = Medico::find($id);
-        $medico->fill($request->all());
+        $aseguradora = Aseguradora::find($id);
+        $aseguradora->fill($request->all());
 
-        $medico->save();
+        $aseguradora->save();
 
-        flash('Medico modificado correctamente');
+        flash('Aseguradora modificada correctamente');
 
-        return redirect()->route('medicos.index');
+        return redirect()->route('aseguradoras.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Aseguradora  $aseguradora
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $medico = Medico::find($id);
-        $medico->delete();
-        flash('Medico borrado correctamente');
+        //
+        $aseguradora = Aseguradora::find($id);
+        $aseguradora->delete();
+        flash('Aseguradora borrada correctamente');
 
-        return redirect()->route('medicos.index');
+        return redirect()->route('aseguradoras.index');
     }
 }

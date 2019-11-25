@@ -23,6 +23,11 @@
                             {!! Form::label('nuhsa', 'NUHSA del paciente') !!}
                             {!! Form::text('nuhsa',null,['class'=>'form-control', 'required']) !!}
                         </div>
+                        <div class="form-group">
+                            {!!Form::label('aseguradora_id', 'Aseguradora paciente') !!}
+                            <br>
+                            {!! Form::select('aseguradora_id', $aseguradoras, ['class' => 'form-control', 'required']) !!}
+                        </div>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}
