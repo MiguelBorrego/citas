@@ -20,7 +20,14 @@
 
 
                         </div>
-
+                        <div class="form-group">
+                            {!! Form::label('duracion', 'Duración en minutos') !!}
+                            {!! Form::text('duracion',$cita->duracion,['class'=>'form-control', 'required', 'autofocus']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('localizacion', 'Localización') !!}
+                            {!! Form::text('localizacion',$cita->localizacion,['class'=>'form-control', 'required', 'autofocus']) !!}
+                        </div>
                         <div class="form-group">
                             {!!Form::label('medico_id', 'Medico') !!}
                             <br>
