@@ -18,7 +18,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
-                                <th>NUHSA</th>
+                                <th>Nuhsa</th>
                                 <th>Aseguradora</th>
 
                                 <th colspan="3">Acciones</th>
@@ -32,7 +32,6 @@
                                     <td>{{ $paciente->surname }}</td>
                                     <td>{{ $paciente->nuhsa }}</td>
                                     <td>{{ $paciente->aseguradora->name }}</td>
-
                                     <td>
                                         {!! Form::open(['route' => ['pacientes.edit',$paciente->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
@@ -40,7 +39,7 @@
                                     </td>
                                     <td>
                                         {!! Form::open(['route' => ['pacientes.show',$paciente->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}
+                                        {!!   Form::submit('Ver Citas', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>

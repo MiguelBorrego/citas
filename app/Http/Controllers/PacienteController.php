@@ -77,12 +77,12 @@ class PacienteController extends Controller
      */
     public function show($id)
     {
+        $paciente = Paciente::find($id);
+        $nombrepaciente = $paciente->getFullNameAttribute();
+        $citas = Cita::all();
+        $filtracitas = $citas->where('paciente_id',$id);
 
-        $citas =Cita::all();
-        $res= $citas->where('paciente_id',$id);
-
-        return view('pacientes/show',['citas'=>$res,'id'=>$id]);
-
+        return view('pacientes/show',['nombrepaciente'=> $nombrepaciente, 'citas'=> $filtracitas ]);
     }
 
     /**
