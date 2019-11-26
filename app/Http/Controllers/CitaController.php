@@ -78,7 +78,24 @@ class CitaController extends Controller
      */
     public function show($id)
     {
-        //
+        $cita = Cita::find($id);
+
+        $fecha_inicial = $cita->fecha_hora;
+        $duracion = $cita->duracion;
+
+        $nuevafecha = strtotime ( $fecha_inicial );
+
+        $i = 0;
+
+        while($i < $duracion){
+            $nuevafecha = strtotime ( '+1 minute' , $nuevafecha ) ;
+            $i++;
+        }
+
+        $fecha_final = date ( 'Y-m-d H:i:s' , $nuevafecha );
+
+
+        return view('citas/show',['cita'=> $cita,'fecha_final'=>$fecha_final]);
     }
 
     /**

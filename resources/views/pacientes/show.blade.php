@@ -20,7 +20,7 @@
                                 <th>Duración</th>
                                 <th>Localización</th>
                                 <th>Medico</th>
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
                             </tr>
 
                             @foreach ($citas as $cita)
@@ -34,6 +34,11 @@
                                     <td>
                                         {!! Form::open(['route' => ['citas.edit',$cita->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
+                                        {!! Form::open(['route' => ['citas.show',$cita->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver Detalles', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>

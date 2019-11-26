@@ -58,7 +58,6 @@ class PacienteController extends Controller
             'aseguradora_id' => 'required|exists:aseguradoras,id'
         ]);
 
-        //TODO: crear validación propia para nuhsa
         $paciente = new Paciente($request->all());
         $paciente->save();
 

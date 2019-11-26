@@ -128,4 +128,12 @@ class AseguradoraController extends Controller
 
         return redirect()->route('aseguradoras.index');
     }
+
+    public function destroyAll()
+    {
+        Aseguradora::truncate();
+        flash('Todas las aseguradoras borradas correctamente');
+
+        return redirect()->route('aseguradoras.index');
+    }
 }
