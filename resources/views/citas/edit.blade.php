@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('localizacion', 'Localización') !!}
-                            {!! Form::text('localizacion',$cita->localizacion,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            {!! Form::text('localizacion',$cita->localizacion,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!!Form::label('medico_id', 'Medico') !!}

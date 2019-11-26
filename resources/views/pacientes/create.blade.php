@@ -26,7 +26,7 @@
                         <div class="form-group">
                             {!!Form::label('aseguradora_id', 'Aseguradora paciente') !!}
                             <br>
-                            {!! Form::select('aseguradora_id', $aseguradoras, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('aseguradora_id', $aseguradoras, ['class' => 'form-control']) !!}
                         </div>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

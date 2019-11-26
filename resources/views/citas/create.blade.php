@@ -21,12 +21,12 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('duracion', 'Duración en minutos') !!}
-                            {!! Form::text('duracion',null,['class'=>'form-control','required','autofocus']) !!}
+                            {!! Form::text('duracion',15,['class'=>'form-control','required','autofocus']) !!}
 
                         </div>
                         <div class="form-group">
                             {!! Form::label('localizacion', 'Localización') !!}
-                            {!! Form::text('localizacion',null,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            {!! Form::text('localizacion',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!!Form::label('medico_id', 'Medico') !!}
