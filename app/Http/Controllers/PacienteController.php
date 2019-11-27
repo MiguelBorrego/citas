@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Aseguradora;
-use App\Cita;
 use Illuminate\Http\Request;
 use App\Paciente;
 
@@ -36,7 +35,7 @@ class PacienteController extends Controller
     public function create()
     {
         //
-        $aseguradoras = Aseguradora::all()->pluck('name','id');
+        $aseguradoras = Aseguradora::all();
 
         return view('pacientes/create',['aseguradoras'=>$aseguradoras]);
 
@@ -54,11 +53,11 @@ class PacienteController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
-            'nuhsa' => 'required|nuhsa|max:255',
-            'aseguradora_id' => 'required|exists:aseguradoras,id'
+            'nuhsa' => 'required|nuhsa|max:255'
         ]);
 
         $paciente = new Paciente($request->all());
+        if($paciente->aseguradora_id==null) $paciente->aseguradora_id = null;
         $paciente->save();
 
         // return redirect('especialidades');
@@ -78,10 +77,9 @@ class PacienteController extends Controller
     {
         $paciente = Paciente::find($id);
         $nombrepaciente = $paciente->getFullNameAttribute();
-        $citas = Cita::all();
-        $filtracitas = $citas->where('paciente_id',$id);
+        $citas = $paciente->citas;
 
-        return view('pacientes/show',['nombrepaciente'=> $nombrepaciente, 'citas'=> $filtracitas ]);
+        return view('pacientes/show',['nombrepaciente'=> $nombrepaciente, 'citas'=> $citas ]);
     }
 
     /**
@@ -94,7 +92,7 @@ class PacienteController extends Controller
     {
         $paciente = Paciente::find($id);
 
-        $aseguradoras = Aseguradora::all()->pluck('name','id');
+        $aseguradoras = Aseguradora::all();
 
         return view('pacientes/edit',['paciente'=> $paciente, 'aseguradoras'=> $aseguradoras ]);
     }
@@ -111,13 +109,12 @@ class PacienteController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
-            'nuhsa' => 'required|nuhsa|max:255',
-            'aseguradora_id' => 'required|exists:aseguradoras,id'
+            'nuhsa' => 'required|nuhsa|max:255'
         ]);
 
         $paciente = Paciente::find($id);
         $paciente->fill($request->all());
-
+        if($paciente->aseguradora_id==null) $paciente->aseguradora_id = null;
         $paciente->save();
 
         flash('Paciente modificado correctamente');

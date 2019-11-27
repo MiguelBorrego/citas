@@ -27,7 +27,12 @@
                         <div class="form-group">
                             {!!Form::label('aseguradora_id', 'Aseguradora paciente') !!}
                             <br>
-                            {!! Form::select('aseguradora_id', $aseguradoras, $paciente->aseguradora_id, ['class' => 'form-control', 'required']) !!}
+                            <select id="aseguradora_id" name="aseguradora_id" class="form-control">
+                                <option value="">Sin Aseguradora</option>
+                                @foreach($aseguradoras as $aseguradora)
+                                    <option value={{$aseguradora->id}}> {{$aseguradora->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

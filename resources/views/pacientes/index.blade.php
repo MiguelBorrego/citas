@@ -18,7 +18,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
-                                <th>Nuhsa</th>
+                                <th>NUHSA</th>
                                 <th>Aseguradora</th>
 
                                 <th colspan="3">Acciones</th>
@@ -31,7 +31,13 @@
                                     <td>{{ $paciente->name }}</td>
                                     <td>{{ $paciente->surname }}</td>
                                     <td>{{ $paciente->nuhsa }}</td>
-                                    <td>{{ $paciente->aseguradora->name }}</td>
+                                    <td>
+                                        @if($paciente->aseguradora_id==null)
+                                            Sin Aseguradora
+                                        @else
+                                            {{ $paciente->aseguradora->name }}
+                                        @endif
+                                    </td>
                                     <td>
                                         {!! Form::open(['route' => ['pacientes.edit',$paciente->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
