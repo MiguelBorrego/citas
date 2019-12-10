@@ -11,14 +11,16 @@ class CitasV2Table extends Migration
     {
         Schema::table('citas', function (Blueprint $table) {
             $table->integer('duracion');
-            $table->string('localizacion');
+            $table->unsignedInteger('localizacion_id');
+
+            $table->foreign('localizacion_id')->references('id')->on('localizacions')->onDelete('cascade');
         });
     }
 
     public function down()
     {
         Schema::table('citas', function (Blueprint $table) {
-            $table->dropColumn(['duracion', 'localizacion']);
+            $table->dropColumn(['duracion', 'localizacion_id']);
         });
     }
 }

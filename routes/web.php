@@ -24,6 +24,8 @@ Route::resource('aseguradoras', 'AseguradoraController');
 Route::resource('medicos', 'MedicoController');
 Route::resource('pacientes', 'PacienteController');
 
+Route::delete('localizaciones/destroyAll', 'LocalizacionController@destroyAll')->name('localizaciones.destroyAll');
+Route::resource('localizaciones', 'LocalizacionController');
 
 Route::resource('citas', 'CitaController');
 

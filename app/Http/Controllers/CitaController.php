@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Localizacion;
 use Illuminate\Http\Request;
 use App\Cita;
 use App\Medico;
@@ -36,12 +37,14 @@ class CitaController extends Controller
      */
     public function create()
     {
-        $medicos = Medico::all()->pluck('full_name','id');
+        $medicos = Medico::all();
 
-        $pacientes = Paciente::all()->pluck('full_name','id');
+        $pacientes = Paciente::all();
+
+        $localizaciones = Localizacion::all();
 
 
-        return view('citas/create',['medicos'=>$medicos, 'pacientes'=>$pacientes]);
+        return view('citas/create',['medicos'=>$medicos, 'pacientes'=>$pacientes, 'localizaciones'=>$localizaciones]);
     }
 
     /**
@@ -57,7 +60,7 @@ class CitaController extends Controller
             'paciente_id' => 'required|exists:pacientes,id',
             'fecha_hora' => 'required|date|after:now',
             'duracion' => 'required|max:200',
-            'localizacion' => 'required|max:255'
+            'localizacion_id' => 'required|exists:localizacions,id'
 
         ]);
 
@@ -78,24 +81,7 @@ class CitaController extends Controller
      */
     public function show($id)
     {
-        $cita = Cita::find($id);
-
-        $fecha_inicial = $cita->fecha_hora;
-        $duracion = $cita->duracion;
-
-        $nuevafecha = strtotime ( $fecha_inicial );
-
-        $i = 0;
-
-        while($i < $duracion){
-            $nuevafecha = strtotime ( '+1 minute' , $nuevafecha ) ;
-            $i++;
-        }
-
-        $fecha_final = date ( 'Y-m-d H:i:s' , $nuevafecha );
-
-
-        return view('citas/show',['cita'=> $cita,'fecha_final'=>$fecha_final]);
+        //
     }
 
     /**
@@ -109,12 +95,14 @@ class CitaController extends Controller
 
         $cita = Cita::find($id);
 
-        $medicos = Medico::all()->pluck('full_name','id');
+        $medicos = Medico::all();
 
-        $pacientes = Paciente::all()->pluck('full_name','id');
+        $pacientes = Paciente::all();
+
+        $localizaciones = Localizacion::all();
 
 
-        return view('citas/edit',['cita'=> $cita, 'medicos'=>$medicos, 'pacientes'=>$pacientes]);
+        return view('citas/edit',['cita'=> $cita, 'medicos'=>$medicos, 'pacientes'=>$pacientes, 'localizaciones'=>$localizaciones]);
     }
 
     /**
@@ -131,7 +119,7 @@ class CitaController extends Controller
             'paciente_id' => 'required|exists:pacientes,id',
             'fecha_hora' => 'required|date|after:now',
             'duracion' => 'required|max:200',
-            'localizacion' => 'required|max:255'
+            'localizacion_id' => 'required|exists:localizacions,id'
 
         ]);
         $cita = Cita::find($id);
