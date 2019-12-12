@@ -11,6 +11,7 @@ class CitasV2Table extends Migration
     {
         Schema::table('citas', function (Blueprint $table) {
             $table->integer('duracion');
+            $table->dateTime('hora_final');
             $table->unsignedInteger('localizacion_id');
 
             $table->foreign('localizacion_id')->references('id')->on('localizacions')->onDelete('cascade');
@@ -20,7 +21,7 @@ class CitasV2Table extends Migration
     public function down()
     {
         Schema::table('citas', function (Blueprint $table) {
-            $table->dropColumn(['duracion', 'localizacion_id']);
+            $table->dropColumn(['duracion','hora_final', 'localizacion_id']);
         });
     }
 }

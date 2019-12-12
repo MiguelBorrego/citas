@@ -8,7 +8,8 @@ class Cita extends Model
 {
     protected $fillable = ['fecha_hora','duracion','localizacion_id', 'medico_id', 'paciente_id'];
 
-    public function getHoraFinalAttribute()
+
+    public function getTiempoFinalAttribute()
     {
         $fecha_inicial = $this->fecha_hora;
         $duracion = $this->duracion;
@@ -26,6 +27,7 @@ class Cita extends Model
 
         return $fecha_final;
     }
+
     public function medico()
     {
         return $this->belongsTo('App\Medico');

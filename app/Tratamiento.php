@@ -15,7 +15,7 @@ class Tratamiento extends Model
     }
 
     /*
-    public function medicamento_tratamiento()
+    public function medicamento_tratamientos()
     {
         return $this->hasMany('App\Medicamento_Tratamiento');
     }
