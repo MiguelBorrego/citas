@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Aseguradora;
-use App\Enfermedad;
 use Illuminate\Http\Request;
 use App\Paciente;
 
@@ -37,9 +36,8 @@ class PacienteController extends Controller
     {
         //
         $aseguradoras = Aseguradora::all();
-        $enfermedades = Enfermedad::all();
 
-        return view('pacientes/create',['aseguradoras'=>$aseguradoras, 'enfermedades'=>$enfermedades]);
+        return view('pacientes/create',['aseguradoras'=>$aseguradoras]);
 
     }
 
@@ -60,7 +58,6 @@ class PacienteController extends Controller
 
         $paciente = new Paciente($request->all());
         if($paciente->aseguradora_id==null) $paciente->aseguradora_id = null;
-        if($paciente->enfermedad_id==null) $paciente->enfermedad_id = null;
         $paciente->save();
 
         // return redirect('especialidades');
@@ -97,9 +94,7 @@ class PacienteController extends Controller
 
         $aseguradoras = Aseguradora::all();
 
-        $enfermedades = Enfermedad::all();
-
-        return view('pacientes/edit',['paciente'=> $paciente, 'aseguradoras'=> $aseguradoras, 'enfermedades'=> $enfermedades]);
+        return view('pacientes/edit',['paciente'=> $paciente, 'aseguradoras'=> $aseguradoras ]);
     }
 
     /**
@@ -120,7 +115,6 @@ class PacienteController extends Controller
         $paciente = Paciente::find($id);
         $paciente->fill($request->all());
         if($paciente->aseguradora_id==null) $paciente->aseguradora_id = null;
-        if($paciente->enfermedad_id==null) $paciente->enfermedad_id = null;
         $paciente->save();
 
         flash('Paciente modificado correctamente');
