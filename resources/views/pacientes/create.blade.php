@@ -33,6 +33,16 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            {!!Form::label('enfermedad_id', 'Enfermedad paciente') !!}
+                            <br>
+                            <select id="enfermedad_id" name="enfermedad_id" class="form-control">
+                                <option value="">Sin Enfermedad</option>
+                                @foreach($enfermedades as $enfermedad)
+                                    <option value={{$enfermedad->id}}> {{$enfermedad->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}
