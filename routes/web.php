@@ -22,6 +22,10 @@ Route::delete('aseguradoras/destroyAll', 'AseguradoraController@destroyAll')->na
 Route::resource('aseguradoras', 'AseguradoraController');
 
 Route::resource('medicos', 'MedicoController');
+
+Route::delete('enfermedades/destroyAll', 'EnfermedadController@destroyAll')->name('enfermedades.destroyAll');
+Route::resource('enfermedades', 'EnfermedadController');
+
 Route::resource('pacientes', 'PacienteController');
 
 Route::delete('localizaciones/destroyAll', 'LocalizacionController@destroyAll')->name('localizaciones.destroyAll');

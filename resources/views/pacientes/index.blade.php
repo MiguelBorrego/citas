@@ -20,6 +20,7 @@
                                 <th>Apellidos</th>
                                 <th>NUHSA</th>
                                 <th>Aseguradora</th>
+                                <th>Enfermedad</th>
 
                                 <th colspan="3">Acciones</th>
                             </tr>
@@ -36,6 +37,13 @@
                                             Sin Aseguradora
                                         @else
                                             {{ $paciente->aseguradora->name }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($paciente->enfermedad_id==null)
+                                            Sin Enfermedad
+                                        @else
+                                            {{ $paciente->enfermedad->name }}
                                         @endif
                                     </td>
                                     <td>
