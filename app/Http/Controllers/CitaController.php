@@ -66,16 +66,25 @@ class CitaController extends Controller
         ]);
         $cita = new Cita($request->all());
 
-        //$fecha_inicio = Carbon::parse($cita->fecha_hora);
-        $cita->hora_final = $cita->tiempo_final;
+        if ($cita-> medico-> especialidad_id == $cita-> paciente-> enfermedad->especialidad_id){
+            //$fecha_inicio = Carbon::parse($cita->fecha_hora);
+            $cita->hora_final = $cita->tiempo_final;
             //$fecha_inicio->addMinutes($cita->duracion);
 
-        $cita->save();
+            $cita->save();
 
 
-        flash('Cita creada correctamente');
+            flash('Cita creada correctamente');
 
-        return redirect()->route('citas.index');
+            return redirect()->route('citas.index');
+
+    }
+        else{
+            flash('La especialidad del médico no es adecuada');
+
+            return redirect()->route('citas.create');
+
+        }
     }
 
     /**
@@ -138,11 +147,24 @@ class CitaController extends Controller
         $cita->hora_final = $cita->tiempo_final;
         //$fecha_inicio->addMinutes($cita->duracion);
 
-        $cita->save();
+        if ($cita-> medico-> especialidad_id == $cita-> paciente-> enfermedad->especialidad_id){
+            //$fecha_inicio = Carbon::parse($cita->fecha_hora);
+            $cita->hora_final = $cita->tiempo_final;
+            //$fecha_inicio->addMinutes($cita->duracion);
 
-        flash('Cita modificada correctamente');
+            $cita->save();
 
-        return redirect()->route('citas.index');
+
+            flash('Cita creada correctamente');
+
+            return redirect()->route('citas.index');
+
+        }
+        else {
+            flash('La especialidad del médico no es adecuada');
+
+            return redirect()->route('citas.edit', ['citas' => $cita->id ]);
+        }
     }
 
     /**
