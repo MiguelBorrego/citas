@@ -66,7 +66,7 @@ class CitaController extends Controller
         ]);
         $cita = new Cita($request->all());
 
-        if ($cita-> medico-> especialidad_id == $cita-> paciente-> enfermedad->especialidad_id){
+        if ($cita-> paciente-> enfermedad_id == null or $cita-> medico-> especialidad_id == $cita-> paciente-> enfermedad->especialidad_id){
             //$fecha_inicio = Carbon::parse($cita->fecha_hora);
             $cita->hora_final = $cita->tiempo_final;
             //$fecha_inicio->addMinutes($cita->duracion);
@@ -80,7 +80,7 @@ class CitaController extends Controller
 
     }
         else{
-            flash('La especialidad del médico no corresponde con la enfermedad');
+            flash('La especialidad del médico no es adecuada');
 
             return redirect()->route('citas.create');
 
@@ -147,7 +147,7 @@ class CitaController extends Controller
         $cita->hora_final = $cita->tiempo_final;
         //$fecha_inicio->addMinutes($cita->duracion);
 
-        if ($cita-> medico-> especialidad_id == $cita-> paciente-> enfermedad->especialidad_id){
+        if ($cita-> paciente-> enfermedad_id == null or $cita-> medico-> especialidad_id == $cita-> paciente-> enfermedad->especialidad_id){
             //$fecha_inicio = Carbon::parse($cita->fecha_hora);
             $cita->hora_final = $cita->tiempo_final;
             //$fecha_inicio->addMinutes($cita->duracion);
@@ -161,7 +161,7 @@ class CitaController extends Controller
 
         }
         else {
-            flash('La especialidad del médico no corresponde con la enfermedad');
+            flash('La especialidad del médico no es adecuada');
 
             return redirect()->route('citas.edit', ['citas' => $cita->id ]);
         }
