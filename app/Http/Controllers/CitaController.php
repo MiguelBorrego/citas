@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Localizacion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Cita;
 use App\Medico;
@@ -63,8 +64,12 @@ class CitaController extends Controller
             'localizacion_id' => 'required|exists:localizacions,id'
 
         ]);
-
         $cita = new Cita($request->all());
+
+        //$fecha_inicio = Carbon::parse($cita->fecha_hora);
+        $cita->hora_final = $cita->tiempo_final;
+            //$fecha_inicio->addMinutes($cita->duracion);
+
         $cita->save();
 
 
@@ -81,7 +86,11 @@ class CitaController extends Controller
      */
     public function show($id)
     {
-        //
+        $cita = Cita::find($id);
+
+        $tratamientos= $cita->tratamientos;
+
+        return view('citas/show',['cita'=>$cita,'tratamientos'=>$tratamientos]);
     }
 
     /**
@@ -124,6 +133,10 @@ class CitaController extends Controller
         ]);
         $cita = Cita::find($id);
         $cita->fill($request->all());
+
+        //$fecha_inicio = Carbon::parse($cita->fecha_hora);
+        $cita->hora_final = $cita->tiempo_final;
+        //$fecha_inicio->addMinutes($cita->duracion);
 
         $cita->save();
 

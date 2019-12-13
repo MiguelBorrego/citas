@@ -31,7 +31,8 @@ Route::resource('citas', 'CitaController');
 
 Route::resource('tratamientos', 'TratamientoController');
 
-
+Route::delete('medicamentos/destroyAll', 'MedicamentoController@destroyAll')->name('medicamentos.destroyAll');
+Route::resource('medicamentos', 'MedicamentoController');
 
 
 Auth::routes();

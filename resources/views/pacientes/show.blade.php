@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Citas Del Paciente {{$nombrepaciente}}</div>
 
@@ -17,6 +17,7 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Fecha</th>
+                                <th>Hora Final De La Cita</th>
                                 <th>Duración</th>
                                 <th>Localización</th>
                                 <th>Medico</th>
@@ -28,8 +29,9 @@
 
                                 <tr>
                                     <td>{{ $cita->fecha_hora }}</td>
+                                    <td>{{ $cita->hora_final}}</td>
                                     <td>{{ $cita->duracion }}</td>
-                                    <td>{{ $cita->localizacion }}</td>
+                                    <td>{{ $cita->localizacion->hospital }}</td>
                                     <td>{{ $cita->medico->full_name }}</td>
                                     <td>
                                         {!! Form::open(['route' => ['citas.edit',$cita->id], 'method' => 'get']) !!}
