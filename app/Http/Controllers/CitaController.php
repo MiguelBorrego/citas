@@ -80,7 +80,7 @@ class CitaController extends Controller
 
     }
         else{
-            flash('La especialidad del médico no es adecuada');
+            flash('La especialidad del médico no corresponde con la enfermedad');
 
             return redirect()->route('citas.create');
 
@@ -161,7 +161,7 @@ class CitaController extends Controller
 
         }
         else {
-            flash('La especialidad del médico no es adecuada');
+            flash('La especialidad del médico no corresponde con la enfermedad');
 
             return redirect()->route('citas.edit', ['citas' => $cita->id ]);
         }
