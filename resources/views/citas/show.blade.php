@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h2>Cita del Paciente {{ $cita->paciente->full_name}}</h2></div>
                     <div class="panel-body">
@@ -26,7 +26,7 @@
                                 <th>Fecha Inicial</th>
                                 <th>Fecha Final</th>
                                 <th>Descripción</th>
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
                             </tr>
 
                             @foreach ($tratamientos as $tratamiento)
@@ -39,6 +39,11 @@
 
                                         {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
+                                        {!! Form::open(['route' => ['tratamientos.show',$tratamiento->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver Detalles', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>

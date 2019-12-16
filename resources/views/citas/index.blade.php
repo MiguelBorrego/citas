@@ -43,7 +43,7 @@
 
                                     <td>
                                         {!! Form::open(['route' => ['citas.show',$cita->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Ver Detalles', ['class'=> 'btn btn-primary'])!!}
+                                        {!!   Form::submit('Ver', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
 

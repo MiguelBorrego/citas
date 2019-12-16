@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MedicamentoTratamiento;
 use Illuminate\Http\Request;
 use App\Tratamiento;
 use App\Cita;
@@ -74,7 +75,12 @@ class TratamientoController extends Controller
      */
     public function show($id)
     {
-        //
+        $tratamiento = Tratamiento::find($id);
+
+        $medicamento_tratamientos = $tratamiento->medicamento_tratamientos;
+
+        return view('tratamientos/show',['tratamiento'=> $tratamiento, 'medicamento_tratamientos'=>$medicamento_tratamientos]);
+
     }
 
     /**

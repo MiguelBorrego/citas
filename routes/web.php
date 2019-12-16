@@ -38,6 +38,8 @@ Route::resource('tratamientos', 'TratamientoController');
 Route::delete('medicamentos/destroyAll', 'MedicamentoController@destroyAll')->name('medicamentos.destroyAll');
 Route::resource('medicamentos', 'MedicamentoController');
 
+Route::resource('medicamento_tratamientos', 'Medicamento_TratamientoController');
+
 
 Auth::routes();
 
