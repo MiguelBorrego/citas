@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <Style>
+        .page-item{
+            display: inline-block;
+            padding: 10px;
+        }
+    </Style>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -56,6 +62,9 @@
                                 </tr>
                             @endforeach
                         </table>
+                        <div>
+                            {{$citas->links()}}
+                        </div>
                     </div>
                 </div>
             </div>

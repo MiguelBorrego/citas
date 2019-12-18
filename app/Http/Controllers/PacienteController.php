@@ -23,7 +23,7 @@ class PacienteController extends Controller
     {
         //
 
-        $pacientes = Paciente::all();
+        $pacientes = Paciente::paginate(5);
 
         return view('pacientes/index',['pacientes'=>$pacientes]);
     }

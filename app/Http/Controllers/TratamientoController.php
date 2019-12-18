@@ -22,7 +22,7 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        $tratamientos = Tratamiento::all();
+        $tratamientos = Tratamiento::paginate(5);
 
         return view('tratamientos/index',['tratamientos'=>$tratamientos]);
     }

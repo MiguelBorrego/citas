@@ -22,7 +22,7 @@ class LocalizacionController extends Controller
     public function index()
     {
         //
-        $localizaciones = Localizacion::all();
+        $localizaciones = Localizacion::paginate(5);
 
         return view('localizaciones/index',['localizaciones'=>$localizaciones]);
     }

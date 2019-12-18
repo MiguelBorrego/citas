@@ -22,7 +22,7 @@ class MedicoController extends Controller
      */
     public function index()
     {
-        $medicos = Medico::all();
+        $medicos = Medico::paginate(5);
 
         return view('medicos/index',['medicos'=>$medicos]);
 

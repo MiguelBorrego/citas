@@ -23,7 +23,7 @@ class MedicamentoController extends Controller
     {
         //
 
-        $medicamentos = Medicamento::all();
+        $medicamentos = Medicamento::paginate(5);
 
         return view('medicamentos/index')->with('medicamentos', $medicamentos);
     }
