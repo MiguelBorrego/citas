@@ -14,10 +14,10 @@ class Tratamiento extends Model
         return $this->belongsTo('App\Cita');
     }
 
-    /*
+
     public function medicamento_tratamientos()
     {
-        return $this->hasMany('App\Medicamento_Tratamiento');
+        return $this->hasMany('App\MedicamentoTratamiento');
     }
-    */
+
 }

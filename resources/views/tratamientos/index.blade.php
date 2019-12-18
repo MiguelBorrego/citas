@@ -27,7 +27,7 @@
                                 <th>Descripción</th>
                                 <th>Paciente</th>
 
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
                             </tr>
 
                             @foreach ($tratamientos as $tratamiento)
@@ -41,6 +41,11 @@
                                     <td>
                                         {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
+                                        {!! Form::open(['route' => ['tratamientos.show',$tratamiento->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver Detalles', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
