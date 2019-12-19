@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Aseguradora;
+use App\Especialidad;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Enfermedad;
 use App\Paciente;
+use App\Cita;
+
+use Illuminate\Support\Facades\DB;
 
 class PacienteController extends Controller
 {
@@ -25,9 +30,38 @@ class PacienteController extends Controller
 
         $pacientes = Paciente::all();
 
-        return view('pacientes/index',['pacientes'=>$pacientes]);
+        $especialidades = Especialidad::all();
+
+        return view('pacientes/index',['pacientes'=>$pacientes,'especialidades'=>$especialidades]);
     }
 
+    public function indexBusqueda(Request $request)
+    {
+        //
+
+        $especialidades = Especialidad::all();
+
+        if($request->especialidad_id==null){
+            $pacientes=Paciente::all();
+
+        }else {
+
+            $enfermedades = Enfermedad::all()->where('especialidad_id', $request->especialidad_id);
+            $pacientes = collect([]);
+
+
+            foreach ($enfermedades as $enfermedad) {
+                $pacients = $enfermedad->pacientes;
+                foreach ($pacients as $p) {
+                    $pacientes->push($p);
+                }
+
+            }
+        }
+
+
+        return view('pacientes/index',['pacientes'=>$pacientes,'especialidades'=>$especialidades]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -80,11 +114,21 @@ class PacienteController extends Controller
     {
         $paciente = Paciente::find($id);
         $nombrepaciente = $paciente->getFullNameAttribute();
-        $citas = $paciente->citas;
 
-        return view('pacientes/show',['nombrepaciente'=> $nombrepaciente, 'citas'=> $citas ]);
+        $citas = Cita::where('fecha_hora','>=',Carbon::now())->where('paciente_id',$id)->paginate(5);
+
+        return view('pacientes/show',['nombrepaciente'=> $nombrepaciente,'id'=>$id, 'citas'=> $citas,'todas'=>false ]);
     }
 
+    public function showAll($id)
+    {
+        $paciente = Paciente::find($id);
+        $nombrepaciente = $paciente->getFullNameAttribute();
+
+        $citas = Cita::where('paciente_id',$id)->paginate(5);
+
+        return view('pacientes/show',['nombrepaciente'=> $nombrepaciente,'id'=>$id, 'citas'=> $citas,'todas'=>true ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

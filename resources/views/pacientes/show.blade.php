@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <Style>
+        .Page-item{
+            display: inline-block;
+            padding: 10px;
+        }
+    </Style>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -9,10 +15,20 @@
 
                     <div class="panel-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => 'citas.create', 'method' => 'get']) !!}
+                        {!! Form::open(['route' => 'citas.create', 'method' => 'get', 'class'=>'inline-important']) !!}
                         {!!   Form::submit('Crear cita', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
+                        @if($todas)
+                            {!! Form::open(['route' => ['pacientes.show',$id], 'method' => 'get', 'class'=>'inline-important']) !!}
+                            {!!   Form::submit('Ver citas futuras', ['class'=> 'btn btn-success'])!!}
+                            {!! Form::close() !!}
+
+                        @else
+                            {!! Form::open(['route' => ['pacientes.showAll',$id], 'method' => 'get', 'class'=>'inline-important']) !!}
+                            {!!   Form::submit('Ver todas las citas', ['class'=> 'btn btn-success'])!!}
+                            {!! Form::close() !!}
+                        @endif
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
@@ -52,6 +68,9 @@
                                 </tr>
                             @endforeach
                         </table>
+                        <div>
+                            {{$citas->links()}}
+                        </div>
                     </div>
                 </div>
             </div>

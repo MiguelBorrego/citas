@@ -25,7 +25,7 @@ class EspecialidadController extends Controller
         //
 
 
-        $especialidades = Especialidad::all();
+        $especialidades = Especialidad::paginate(5);
 
         return view('especialidades/index')->with('especialidades', $especialidades);
 

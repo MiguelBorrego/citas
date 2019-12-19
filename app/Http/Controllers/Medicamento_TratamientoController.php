@@ -25,7 +25,7 @@ class Medicamento_TratamientoController extends Controller
      */
     public function index()
     {
-        $medicamento_tratamientos=MedicamentoTratamiento::all();
+        $medicamento_tratamientos=MedicamentoTratamiento::paginate(5);
 
         return view( 'medicamento_tratamientos/index',['medicamento_tratamientos'=>$medicamento_tratamientos]);
     }

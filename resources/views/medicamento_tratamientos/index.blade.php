@@ -1,11 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+    <Style>
+        .Page-item{
+            display: inline-block;
+            padding: 10px;
+        }
+    </Style>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Asociación Medicamento Tratamiento</div>
+                    <div class="panel-heading">Medicación</div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -56,6 +62,9 @@
                                 </tr>
                             @endforeach
                         </table>
+                        <div>
+                            {{$medicamento_tratamientos->links()}}
+                        </div>
                     </div>
                 </div>
             </div>

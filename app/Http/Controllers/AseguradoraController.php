@@ -22,7 +22,7 @@ class AseguradoraController extends Controller
     public function index()
     {
         //
-        $aseguradoras = Aseguradora::all();
+        $aseguradoras = Aseguradora::paginate(5);
 
         return view('aseguradoras/index')->with('aseguradoras', $aseguradoras);
     }

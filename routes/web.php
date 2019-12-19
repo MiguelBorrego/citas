@@ -26,11 +26,14 @@ Route::resource('medicos', 'MedicoController');
 Route::delete('enfermedades/destroyAll', 'EnfermedadController@destroyAll')->name('enfermedades.destroyAll');
 Route::resource('enfermedades', 'EnfermedadController');
 
+Route::get('pacientes/showAll/{id}', 'PacienteController@showAll')->name('pacientes.showAll');
+Route::get('pacientes/indexBusqueda', 'PacienteController@indexBusqueda')->name('pacientes.indexBusqueda');
 Route::resource('pacientes', 'PacienteController');
 
 Route::delete('localizaciones/destroyAll', 'LocalizacionController@destroyAll')->name('localizaciones.destroyAll');
 Route::resource('localizaciones', 'LocalizacionController');
 
+Route::get('citas/indexAll', 'CitaController@indexAll')->name('citas.indexAll');
 Route::resource('citas', 'CitaController');
 
 Route::resource('tratamientos', 'TratamientoController');

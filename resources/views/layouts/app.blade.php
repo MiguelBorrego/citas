@@ -107,7 +107,7 @@
                                     </li>
                                     <li>
                                         <a href="{{ url('/medicamento_tratamientos') }}">
-                                            Asociación Medicamento Tratamiento
+                                            Medicación
                                         </a>
                                     </li>
                                     <li>

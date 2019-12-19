@@ -14,6 +14,21 @@
                         {!! Form::close() !!}
 
                         <br><br>
+                        {!! Form::open(['route' => 'pacientes.indexBusqueda','method' => 'get']) !!}
+                        <div class="form-group">
+                            {!!Form::label('especialidad_id', 'Especialidad Enfermedad') !!}
+                            <br>
+                            <select id="especialidad_id" name="especialidad_id" class="form-control">
+                                <option value="">Todas las especialidades</option>
+                                @foreach($especialidades as $especialidad)
+                                    <option value={{$especialidad->id}}> {{$especialidad->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {!! Form::submit('Buscar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::close() !!}
+
+                        <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
@@ -25,8 +40,8 @@
                                 <th colspan="3">Acciones</th>
                             </tr>
 
-                            @foreach ($pacientes as $paciente)
 
+                            @foreach ($pacientes as $paciente)
 
                                 <tr>
                                     <td>{{ $paciente->name }}</td>

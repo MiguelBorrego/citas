@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'medicamentos.store', 'class'=>'form-inline']) !!}
+                        {!! Form::open(['route' => 'medicamentos.store']) !!}
                         <div class="form-group">
                             {!! Form::label('nombre_comercial', 'Nombre comercial del medicamento') !!}
                             {!! Form::text('nombre_comercial',null,['class'=>'form-control', 'required', 'autofocus']) !!}

@@ -23,7 +23,7 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        $tratamientos = Tratamiento::all();
+        $tratamientos = Tratamiento::paginate(5);
 
         return view('tratamientos/index',['tratamientos'=>$tratamientos]);
     }
@@ -77,7 +77,7 @@ class TratamientoController extends Controller
     {
         $tratamiento = Tratamiento::find($id);
 
-        $medicamento_tratamientos = $tratamiento->medicamento_tratamientos;
+        $medicamento_tratamientos = MedicamentoTratamiento::where('tratamiento_id',$id)->paginate(5);
 
         return view('tratamientos/show',['tratamiento'=> $tratamiento, 'medicamento_tratamientos'=>$medicamento_tratamientos]);
 

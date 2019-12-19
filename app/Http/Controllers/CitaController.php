@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Localizacion;
+use App\Tratamiento;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Cita;
@@ -26,9 +27,16 @@ class CitaController extends Controller
      */
     public function index()
     {
-        $citas = Cita::all();
+        $citas = Cita::where('fecha_hora','>=',Carbon::now())->paginate(5);
 
-        return view('citas/index',['citas'=>$citas]);
+        return view('citas/index',['citas'=>$citas,'todas'=>false]);
+    }
+
+    public function indexAll()
+    {
+        $citas = Cita::paginate(5);
+
+        return view('citas/index',['citas'=>$citas,'todas'=>true]);
     }
 
     /**
@@ -97,7 +105,7 @@ class CitaController extends Controller
     {
         $cita = Cita::find($id);
 
-        $tratamientos= $cita->tratamientos;
+        $tratamientos= Tratamiento::where('cita_id',$id)->paginate(5);
 
         return view('citas/show',['cita'=>$cita,'tratamientos'=>$tratamientos]);
     }

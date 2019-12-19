@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <Style>
+        .Page-item{
+            display: inline-block;
+            padding: 10px;
+        }
+    </Style>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -18,7 +24,7 @@
                         <h1> </h1>
                         @include('flash::message')
                         {!! Form::open(['route' => 'medicamento_tratamientos.create', 'method' => 'get']) !!}
-                        {!!   Form::submit('Añadir medicamento', ['class'=> 'btn btn-primary'])!!}
+                        {!!   Form::submit('Añadir medicación', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
                         <br>
                         <h4>Lista De Medicamentos</h4>
@@ -58,6 +64,9 @@
                                 </tr>
                             @endforeach
                         </table>
+                        <div>
+                            {{$medicamento_tratamientos->links()}}
+                        </div>
                     </div>
                 </div>
             </div>
