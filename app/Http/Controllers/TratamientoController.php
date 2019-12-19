@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\MedicamentoTratamiento;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Tratamiento;
 use App\Cita;
@@ -23,11 +24,17 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        $tratamientos = Tratamiento::paginate(5);
+        $tratamientos = Tratamiento::where('fecha_final','>=',Carbon::now())->paginate(5);
 
-        return view('tratamientos/index',['tratamientos'=>$tratamientos]);
+        return view('tratamientos/index',['tratamientos'=>$tratamientos,'todos'=>false]);
     }
 
+    public function indexAll()
+    {
+        $tratamientos = Tratamiento::paginate(5);
+
+        return view('tratamientos/index',['tratamientos'=>$tratamientos,'todos'=>true]);
+    }
     /**
      * Show the form for creating a new resource.
      *

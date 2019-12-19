@@ -15,9 +15,20 @@
 
                     <div class="panel-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => 'tratamientos.create', 'method' => 'get']) !!}
+                        {!! Form::open(['route' => 'tratamientos.create', 'method' => 'get', 'class'=>'inline-important']) !!}
                         {!!   Form::submit('Crear tratamiento', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
+
+                        @if($todos)
+                            {!! Form::open(['route' => 'tratamientos.index', 'method' => 'get', 'class'=>'inline-important']) !!}
+                            {!!   Form::submit('Ver solo tratamientos vigentes', ['class'=> 'btn btn-success'])!!}
+                            {!! Form::close() !!}
+
+                        @else
+                            {!! Form::open(['route' => 'tratamientos.indexAll', 'method' => 'get', 'class'=>'inline-important']) !!}
+                            {!!   Form::submit('Ver todos los tratamientos', ['class'=> 'btn btn-success'])!!}
+                            {!! Form::close() !!}
+                        @endif
 
                         <br><br>
                         <table class="table table-striped table-bordered">

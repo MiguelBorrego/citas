@@ -40,6 +40,7 @@ Route::resource('localizaciones', 'LocalizacionController');
 Route::get('citas/indexAll', 'CitaController@indexAll')->name('citas.indexAll');
 Route::resource('citas', 'CitaController');
 
+Route::get('tratamientos/indexAll', 'TratamientoController@indexAll')->name('tratamientos.indexAll');
 Route::resource('tratamientos', 'TratamientoController');
 
 
