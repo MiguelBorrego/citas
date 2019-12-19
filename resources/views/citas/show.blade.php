@@ -14,7 +14,8 @@
                     <div class="panel-heading"><h2>Cita del Paciente {{ $cita->paciente->full_name}}</h2></div>
                     <div class="panel-body">
                         <table class="table table-striped table-bordered">
-                            <h4>Fecha Hora: {{$cita->fecha_hora}}</h4>
+                            <h4>Fecha: Día {{substr($cita->fecha_hora,0,10)}} a las {{substr($cita->fecha_hora,10,15)}}</h4>
+
                             <h2> </h2>
                             <h4>Localización: Hospital {{$cita->localizacion->hospital}}</h4>
                             <p>- Ciudad: {{$cita->localizacion->ciudad}}</p>

@@ -16,7 +16,10 @@
                         <table class="table table-striped table-bordered">
                             <h3>Detalles Del Tratamiento</h3>
                             <h5>Dada por el médico {{$tratamiento->cita->medico->fullname}}</h5>
-                            <h5>En la cita {{$tratamiento->cita->fecha_hora}}/{{$tratamiento->cita->hora_final}}</h5>
+                            <h5>En la cita del día {{substr($tratamiento->cita->fecha_hora,0,10)}} a las
+                                {{substr($tratamiento->cita->fecha_hora,10,15)}} hasta el día
+                                {{substr($tratamiento->cita->hora_final,0,10)}} a las
+                                {{substr($tratamiento->cita->hora_final,10,15)}}</h5>
                             <h5>Fecha Inicial: {{$tratamiento->fecha_inicial}}</h5>
                             <h5>Fecha Final: {{$tratamiento->fecha_final}}</h5>
                             <h5>Descripción: {{$tratamiento->descripcion}}</h5>

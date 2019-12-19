@@ -9,9 +9,9 @@
     </Style>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Medicos</div>
+                    <div class="panel-heading"><h2>Medicos</h2></div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -19,13 +19,24 @@
                         {!!   Form::submit('Crear medico', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
+                        <div class="panel-body">
+                            <h3>Filtros</h3>
+                            {!! Form::open(['route' => 'medicos.indexBusqueda','method' => 'get']) !!}
+                            <div class="form-group">
+                                {!! Form::label('fullname', 'Nombre del médico') !!}
+                                {!! Form::text('fullname',null,['class'=>'form-control', 'autofocus']) !!}
+                            </div>
+                            {!! Form::submit('Buscar',['class'=>'btn-primary btn']) !!}
+                            {!! Form::close() !!}
+                        </div>
+
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Especialidad</th>
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
                             </tr>
 
                             @foreach ($medicos as $medico)
@@ -39,6 +50,11 @@
                                     <td>
                                         {!! Form::open(['route' => ['medicos.edit',$medico->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
+                                        {!! Form::open(['route' => ['medicos.show',$medico->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver citas', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>

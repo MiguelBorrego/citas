@@ -1,11 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+    <Style>
+        .Page-item{
+            display: inline-block;
+            padding: 10px;
+        }
+    </Style>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Pacientes</div>
+                    <div class="panel-heading"><h2>Pacientes</h2></div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -13,10 +19,9 @@
                         {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
-                        <h1> </h1>
 
                         <div class="panel-body">
-                            <h2>Filtros</h2>
+                            <h3>Filtros</h3>
                             {!! Form::open(['route' => 'pacientes.indexBusqueda','method' => 'get']) !!}
                             <div class="form-group">
                                 {!! Form::label('fullname', 'Nombre del paciente') !!}
@@ -45,7 +50,7 @@
                                 <th>Aseguradora</th>
                                 <th>Enfermedad</th>
 
-                                <th colspan="3">Acciones</th>
+                                <th colspan="4">Acciones</th>
                             </tr>
 
 
@@ -80,6 +85,11 @@
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
+                                        {!! Form::open(['route' => ['pacientes.show2',$paciente->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver Tratamientos', ['class'=> 'btn btn-info'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
                                         {!! Form::open(['route' => ['pacientes.destroy',$paciente->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Borrar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
@@ -88,6 +98,8 @@
                                 </tr>
                             @endforeach
                         </table>
+                        <div>
+                            {{$pacientes->links()}}
                     </div>
                 </div>
             </div>

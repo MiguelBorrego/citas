@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Aseguradora;
 use App\Especialidad;
+use App\Tratamiento;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Enfermedad;
@@ -28,7 +29,7 @@ class PacienteController extends Controller
     {
         //
 
-        $pacientes = Paciente::all();
+        $pacientes = Paciente::paginate(5);
 
         $especialidades = Especialidad::all();
 
@@ -43,36 +44,43 @@ class PacienteController extends Controller
 
         if($request->especialidad_id==null){
 
-            $pacientes = collect([]);
-            $pacients=Paciente::all();
-            foreach ($pacients as $p){
+
+            $pacientesId = collect([]);
+            $pacientes=Paciente::all();
+
+            foreach ($pacientes as $paciente){
+
                 if($request->fullname == null){
-                    $pacientes->push($p);
-                }elseif(str_contains($p->fullname,$request->fullname)) {
-                    $pacientes->push($p);
+                    $pacientesId->push($paciente->id);
+
+                }elseif(str_contains($paciente->fullname,$request->fullname)) {
+                    $pacientesId->push($paciente->id);
                 }
             }
 
         }else {
 
             $enfermedades = Enfermedad::all()->where('especialidad_id', $request->especialidad_id);
-            $pacientes = collect([]);
+            $pacientesId = collect([]);
 
 
             foreach ($enfermedades as $enfermedad) {
-                $pacients = $enfermedad->pacientes;
-                foreach ($pacients as $p) {
+                $pacientes = $enfermedad->pacientes;
+
+                foreach ($pacientes as $paciente) {
+
                     if($request->fullname == null){
-                        $pacientes->push($p);
-                    }elseif(str_contains($p->fullname,$request->fullname)) {
-                        $pacientes->push($p);
+                        $pacientesId->push($paciente->id);
+                    }elseif(str_contains($paciente->fullname,$request->fullname)) {
+                        $pacientesId->push($paciente->id);
                     }
                 }
 
             }
         }
+        $pacientesTotal = Paciente::whereIn('id',$pacientesId)->paginate(5);
 
-        return view('pacientes/index',['pacientes'=>$pacientes,'especialidades'=>$especialidades]);
+        return view('pacientes/index',['pacientes'=>$pacientesTotal,'especialidades'=>$especialidades]);
     }
     /**
      * Show the form for creating a new resource.
@@ -141,6 +149,44 @@ class PacienteController extends Controller
 
         return view('pacientes/show',['nombrepaciente'=> $nombrepaciente,'id'=>$id, 'citas'=> $citas,'todas'=>true ]);
     }
+
+    public function show2($id)
+    {
+        $paciente = Paciente::find($id);
+        $nombrepaciente = $paciente->getFullNameAttribute();
+
+        $citas = $paciente->citas;
+        $citas_id = collect([]);
+
+        foreach ($citas as $cita){
+            $citas_id->push($cita->id);
+        }
+
+        $tratamientos = Tratamiento::whereIn('cita_id', $citas_id)->where('fecha_final', '>=', Carbon::now())->paginate(5);
+
+
+        return view('pacientes/show2',['nombrepaciente'=> $nombrepaciente,'id'=>$id,'tratamientos'=> $tratamientos,'todos'=>false]);
+    }
+
+    public function show2All($id)
+    {
+        $paciente = Paciente::find($id);
+        $nombrepaciente = $paciente->getFullNameAttribute();
+
+        $citas = $paciente->citas;
+        $citas_id = collect([]);
+
+        foreach ($citas as $cita){
+            $citas_id->push($cita->id);
+        }
+
+        $tratamientos = Tratamiento::whereIn('cita_id', $citas_id)->paginate(5);
+
+
+        return view('pacientes/show2',['nombrepaciente'=> $nombrepaciente,'id'=>$id,'tratamientos'=> $tratamientos,'todos'=>true]);
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *

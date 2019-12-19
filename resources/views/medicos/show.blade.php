@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h2>Citas Del Paciente {{$nombrepaciente}}</h2></div>
+                    <div class="panel-heading"><h2>Citas Del Médico {{$nombremedico}}</h2></div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -20,12 +20,12 @@
                         {!! Form::close() !!}
 
                         @if($todas)
-                            {!! Form::open(['route' => ['pacientes.show',$id], 'method' => 'get', 'class'=>'inline-important']) !!}
+                            {!! Form::open(['route' => ['medicos.show',$id], 'method' => 'get', 'class'=>'inline-important']) !!}
                             {!!   Form::submit('Ver citas futuras', ['class'=> 'btn btn-success'])!!}
                             {!! Form::close() !!}
 
                         @else
-                            {!! Form::open(['route' => ['pacientes.showAll',$id], 'method' => 'get', 'class'=>'inline-important']) !!}
+                            {!! Form::open(['route' => ['medicos.showAll',$id], 'method' => 'get', 'class'=>'inline-important']) !!}
                             {!!   Form::submit('Ver todas las citas', ['class'=> 'btn btn-success'])!!}
                             {!! Form::close() !!}
                         @endif
@@ -36,7 +36,7 @@
                                 <th>Hora Final De La Cita</th>
                                 <th>Duración</th>
                                 <th>Localización</th>
-                                <th>Medico</th>
+                                <th>Paciente</th>
                                 <th colspan="3">Acciones</th>
                             </tr>
 
@@ -48,7 +48,7 @@
                                     <td>{{ $cita->hora_final}}</td>
                                     <td>{{ $cita->duracion }}</td>
                                     <td>{{ $cita->localizacion->hospital }}</td>
-                                    <td>{{ $cita->medico->full_name }}</td>
+                                    <td>{{ $cita->paciente->full_name }}</td>
                                     <td>
                                         {!! Form::open(['route' => ['citas.edit',$cita->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
@@ -76,3 +76,4 @@
             </div>
         </div>
 @endsection
+

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
 use App\Especialidad;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Medico;
@@ -26,6 +28,24 @@ class MedicoController extends Controller
 
         return view('medicos/index',['medicos'=>$medicos]);
 
+    }
+
+    public function indexBusqueda(Request $request)
+    {
+        $medicos = Medico::all();
+        $medicosId = collect([]);
+
+        foreach ($medicos as $medico) {
+            if($request->fullname==null){
+                $medicosId->push($medico->id);
+            }elseif (str_contains($medico->fullname, $request->fullname)) {
+                $medicosId->push($medico->id);
+            }
+        }
+
+        $medicosTotal=Medico::whereIn('id',$medicosId)->paginate(5);
+
+        return view('medicos/index',['medicos'=>$medicosTotal]);
     }
 
     /**
@@ -73,7 +93,22 @@ class MedicoController extends Controller
      */
     public function show($id)
     {
-        //
+        $medico = Medico::find($id);
+        $nombremedico = $medico->getFullNameAttribute();
+
+        $citas = Cita::where('fecha_hora','>=',Carbon::now())->where('medico_id',$id)->paginate(5);
+
+        return view('medicos/show',['nombremedico'=> $nombremedico,'id'=>$id, 'citas'=> $citas,'todas'=>false ]);
+    }
+
+    public function showAll($id)
+    {
+        $medico = Medico::find($id);
+        $nombremedico = $medico->getFullNameAttribute();
+
+        $citas = Cita::where('medico_id',$id)->paginate(5);
+
+        return view('medicos/show',['nombremedico'=> $nombremedico,'id'=>$id, 'citas'=> $citas,'todas'=>true ]);
     }
 
     /**

@@ -127,7 +127,6 @@ class CitaController extends Controller
 
         $localizaciones = Localizacion::all();
 
-
         return view('citas/edit',['cita'=> $cita, 'medicos'=>$medicos, 'pacientes'=>$pacientes, 'localizaciones'=>$localizaciones]);
     }
 

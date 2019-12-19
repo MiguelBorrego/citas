@@ -106,11 +106,6 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('/medicamento_tratamientos') }}">
-                                            Medicación
-                                        </a>
-                                    </li>
-                                    <li>
                                         <a href="{{ url('/logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
