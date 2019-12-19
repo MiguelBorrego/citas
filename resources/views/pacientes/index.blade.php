@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <Style>
-        .page-item{
-            display: inline-block;
-            padding: 10px;
-        }
-    </Style>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -19,21 +13,29 @@
                         {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
-                        <br><br>
-                        {!! Form::open(['route' => 'pacientes.indexBusqueda','method' => 'get']) !!}
-                        <div class="form-group">
-                            {!!Form::label('especialidad_id', 'Especialidad Enfermedad') !!}
-                            <br>
-                            <select id="especialidad_id" name="especialidad_id" class="form-control">
-                                <option value="">Todas las especialidades</option>
-                                @foreach($especialidades as $especialidad)
-                                    <option value={{$especialidad->id}}> {{$especialidad->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        {!! Form::submit('Buscar',['class'=>'btn-primary btn']) !!}
-                        {!! Form::close() !!}
+                        <h1> </h1>
 
+                        <div class="panel-body">
+                            <h2>Filtros</h2>
+                            {!! Form::open(['route' => 'pacientes.indexBusqueda','method' => 'get']) !!}
+                            <div class="form-group">
+                                {!! Form::label('fullname', 'Nombre del paciente') !!}
+                                {!! Form::text('fullname',null,['class'=>'form-control', 'autofocus']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!!Form::label('especialidad_id', 'Especialidad Enfermedad') !!}
+                                <br>
+                                <select id="especialidad_id" name="especialidad_id" class="form-control">
+                                    <option value="">Todas las especialidades</option>
+                                    @foreach($especialidades as $especialidad)
+                                        <option value={{$especialidad->id}}> {{$especialidad->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {!! Form::submit('Buscar',['class'=>'btn-primary btn']) !!}
+                            {!! Form::close() !!}
+                        </div>
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
@@ -86,9 +88,6 @@
                                 </tr>
                             @endforeach
                         </table>
-                        <div>
-                            {{$pacientes->links()}}
-                        </div>
                     </div>
                 </div>
             </div>

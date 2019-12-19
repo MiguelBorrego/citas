@@ -28,7 +28,7 @@ class PacienteController extends Controller
     {
         //
 
-        $pacientes = Paciente::paginate(5);
+        $pacientes = Paciente::all();
 
         $especialidades = Especialidad::all();
 
@@ -42,7 +42,16 @@ class PacienteController extends Controller
         $especialidades = Especialidad::all();
 
         if($request->especialidad_id==null){
-            $pacientes=Paciente::all();
+
+            $pacientes = collect([]);
+            $pacients=Paciente::all();
+            foreach ($pacients as $p){
+                if($request->fullname == null){
+                    $pacientes->push($p);
+                }elseif(str_contains($p->fullname,$request->fullname)) {
+                    $pacientes->push($p);
+                }
+            }
 
         }else {
 
@@ -53,12 +62,15 @@ class PacienteController extends Controller
             foreach ($enfermedades as $enfermedad) {
                 $pacients = $enfermedad->pacientes;
                 foreach ($pacients as $p) {
-                    $pacientes->push($p);
+                    if($request->fullname == null){
+                        $pacientes->push($p);
+                    }elseif(str_contains($p->fullname,$request->fullname)) {
+                        $pacientes->push($p);
+                    }
                 }
 
             }
         }
-
 
         return view('pacientes/index',['pacientes'=>$pacientes,'especialidades'=>$especialidades]);
     }
