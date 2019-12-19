@@ -28,7 +28,7 @@ class PacienteController extends Controller
     {
         //
 
-        $pacientes = Paciente::all();
+        $pacientes = Paciente::paginate(5);
 
         $especialidades = Especialidad::all();
 

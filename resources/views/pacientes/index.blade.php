@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <Style>
+        .page-item{
+            display: inline-block;
+            padding: 10px;
+        }
+    </Style>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -80,6 +86,9 @@
                                 </tr>
                             @endforeach
                         </table>
+                        <div>
+                            {{$pacientes->links()}}
+                        </div>
                     </div>
                 </div>
             </div>

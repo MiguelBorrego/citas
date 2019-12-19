@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Aseguradora;
 use Illuminate\Http\Request;
 
+
 class AseguradoraController extends Controller
 {
 
